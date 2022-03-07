@@ -24,7 +24,7 @@ const sendMail = (destinationMail) => {
 
     <p>
       <strong>
-        <a href="http://localhost:3000/login">Ingresa a ColpeDev</a>
+        <a href="http://localhost:4200/">Ingresa a ColpeDev</a>
       </strong>
     </p>
     `,
