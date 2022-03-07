@@ -1,7 +1,8 @@
 import User from "../models/user.js";
-import bcrypt from "../lib/bcrypt.js";
-import jwt from "../lib/jwt.js";
+import bcrypt from "../libs/bcrypt.js";
+import jwt from "../libs/jwt.js";
 import userService from "../services/user.js";
+import mailService from "../services/mail.js";
 
 const registerUser = async (req, res) => {
   let pass = await bcrypt.hassGenerate(req.body.password);
@@ -21,9 +22,12 @@ const registerUser = async (req, res) => {
 
   const token = await jwt.generateToken(result);
 
-  return !token
-    ? res.status(500).send({ message: "Failed to register user" })
-    : res.status(200).send({ token });
+  if (!token) {
+    return res.status(500).send({ message: "Failed to register user" });
+  }
+
+  mailService.sendMail(req.body.email);
+  return res.status(200).send({ token });
 };
 
 const listUsers = async (req, res) => {
