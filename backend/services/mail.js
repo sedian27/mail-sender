@@ -1,11 +1,12 @@
 import nodemailer from "nodemailer";
+import emailConfig from "../config/email.js";
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   auth: {
-    user: "notificacionesciunac@gmail.com",
-    pass: "Notificaciones123@",
+    user: emailConfig.USER,
+    pass: emailConfig.PASS,
   },
 });
 
@@ -14,7 +15,7 @@ const sendMail = (destinationMail) => {
     from: "notificacionesciunac@gmail.com",
     to: destinationMail,
     subject: "ColpeDev - Welcome",
-    text: `
+    html: `
     <h1>Bienvenido a ColpeDev</h1>
     <p>
       Gracias por registrarte en ColpeDev, ahora puedes acceder a todas las

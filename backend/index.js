@@ -11,7 +11,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 
 app.use("/api/role", role);
 app.use("/api/user", user);
